@@ -2,6 +2,7 @@
     "name": "fahdi/php-date-format",
     "description": "A PHP library to convert dates to words",
     "type": "library",
+    "version": "1.0.0",
     "require": {
         "php": "^7.4|^8.0",
         "ext-intl": "*"
