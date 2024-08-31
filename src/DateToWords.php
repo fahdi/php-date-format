@@ -42,12 +42,18 @@ class DateToWords
 
 	private static function convertDayToWords($day)
 	{
+		if ($day == 1) {
+			return 'First';
+		} elseif ($day == 21) {
+			return 'Twenty-first';
+		} elseif ($day == 31) {
+			return 'Thirty-first';
+		}
+
 		$formatter = new NumberFormatter('en', NumberFormatter::SPELLOUT);
 		$dayInWords = ucfirst($formatter->format($day));
 
-		if ($day == 1 || $day == 21 || $day == 31) {
-			return $dayInWords . 'st';
-		} elseif ($day == 2 || $day == 22) {
+		if ($day == 2 || $day == 22) {
 			return $dayInWords . 'nd';
 		} elseif ($day == 3 || $day == 23) {
 			return $dayInWords . 'rd';
@@ -58,11 +64,15 @@ class DateToWords
 
 	private static function convertYearToWords($year)
 	{
+		$formatter = new NumberFormatter('en', NumberFormatter::SPELLOUT);
+
+		if ($year == 2000) {
+			return 'Two thousand';
+		}
+
 		if ($year >= 1000 && $year <= 9999) {
 			$century = floor($year / 100);
 			$remainder = $year % 100;
-
-			$formatter = new NumberFormatter('en', NumberFormatter::SPELLOUT);
 
 			if ($remainder == 0) {
 				return ucfirst($formatter->format($century)) . ' hundred';
@@ -72,7 +82,6 @@ class DateToWords
 				return ucfirst($formatter->format($century)) . ' ' . $formatter->format($remainder);
 			}
 		} else {
-			$formatter = new NumberFormatter('en', NumberFormatter::SPELLOUT);
 			return ucfirst($formatter->format($year));
 		}
 	}
