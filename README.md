@@ -1,24 +1,34 @@
 # PHP Date to Words Converter
 
-This project provides a PHP function to convert dates into words. It includes a main function file and a set of PHPUnit tests.
+This project provides a PHP class to convert dates into words. It includes a main class file and a set of PHPUnit tests.
+
+## Installation
+
+You can install this package via Composer:
+
+```
+composer require fahdi/php-date-format
+```
 
 ## Usage
 
-Include the `date_to_words.php` file in your project and use the `dateToWords()` function:
+After installing the package, you can use it like this:
 
 ```php
 <?php
-require_once 'date_to_words.php';
+require_once 'vendor/autoload.php';
 
-echo dateToWords('1990-05-15');  // Output: Fifteen of May, Nineteen ninety
+use Fahdi\PhpDateFormat\DateToWords;
+
+echo DateToWords::convert('1990-05-15');  // Output: Fifteen of May, Nineteen ninety
 ```
 
 ## Running Tests
 
-To run the tests, you need PHPUnit installed. Then, you can run:
+To run the tests, you can use the following command:
 
 ```
-phpunit DateToWordsTest.php
+./vendor/bin/phpunit tests
 ```
 
 ## Contributing
