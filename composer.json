@@ -19,5 +19,13 @@
         "psr-4": {
             "Fahdi\\PhpDateFormat\\Tests\\": "tests/"
         }
-    }
+    },
+    "authors": [
+        {
+            "name": "Fahdi",
+            "email": "info@fahdmurtaza.com",
+            "homepage": "https://fahdmurtaza.com",
+            "role": "Developer"
+        }
+    ]
 }
