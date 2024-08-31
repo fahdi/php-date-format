@@ -29,7 +29,7 @@ class DateToWords
 
 	private static function cleanDateString($dateString)
 	{
-		$formats = ['Y-m-d', 'd-m-Y', 'm/d/Y', 'd/m/Y', 'Y/m/d', 'F j, Y'];
+		$formats = ['Y-m-d', 'd-m-Y', 'm/d/Y', 'd/m/Y', 'Y/m/d', 'F j, Y', 'Y.m.d'];
 		foreach ($formats as $format) {
 			$date = DateTime::createFromFormat($format, $dateString);
 			if ($date !== false && $date->format($format) == $dateString) {
@@ -42,23 +42,36 @@ class DateToWords
 
 	private static function convertDayToWords($day)
 	{
-		if ($day == 1) {
-			return 'First';
-		} elseif ($day == 21) {
-			return 'Twenty-first';
-		} elseif ($day == 31) {
-			return 'Thirty-first';
-		}
-
 		$formatter = new NumberFormatter('en', NumberFormatter::SPELLOUT);
 		$dayInWords = ucfirst($formatter->format($day));
 
-		if ($day == 2 || $day == 22) {
-			return $dayInWords . 'nd';
-		} elseif ($day == 3 || $day == 23) {
-			return $dayInWords . 'rd';
-		} else {
+		$specialCases = [
+			1 => 'First',
+			2 => 'Second',
+			3 => 'Third',
+			20 => 'Twentieth',
+			21 => 'Twenty-first',
+			22 => 'Twenty-second',
+			23 => 'Twenty-third',
+			29 => 'Twenty-ninth',
+			30 => 'Thirtieth',
+			31 => 'Thirty-first'
+		];
+
+		if (isset($specialCases[$day])) {
+			return $specialCases[$day];
+		}
+
+		if ($day >= 4 && $day <= 20) {
 			return $dayInWords . 'th';
+		}
+
+		$lastDigit = $day % 10;
+		switch ($lastDigit) {
+			case 1: return $dayInWords . 'st';
+			case 2: return $dayInWords . 'nd';
+			case 3: return $dayInWords . 'rd';
+			default: return $dayInWords . 'th';
 		}
 	}
 
@@ -66,20 +79,14 @@ class DateToWords
 	{
 		$formatter = new NumberFormatter('en', NumberFormatter::SPELLOUT);
 
-		if ($year == 2000) {
-			return 'Two thousand';
-		}
-
 		if ($year >= 1000 && $year <= 9999) {
 			$century = floor($year / 100);
 			$remainder = $year % 100;
 
-			$centuryWord = ucfirst($formatter->format($century));
+			$centuryWord = ucfirst($formatter->format($century * 100));
 
 			if ($remainder == 0) {
-				return $centuryWord . ' hundred';
-			} elseif ($remainder < 10) {
-				return $centuryWord . ' oh ' . $formatter->format($remainder);
+				return $centuryWord;
 			} else {
 				return $centuryWord . ' ' . $formatter->format($remainder);
 			}
