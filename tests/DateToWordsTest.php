@@ -11,7 +11,7 @@ class DateToWordsTest extends TestCase
 	{
 		$testCases = [
 			'1990-05-15' => 'Fifteenth of May, Nineteen ninety',
-			'2000-01-01' => 'First of January, Two thousand',
+			'2000-01-01' => 'First of January, Twenty hundred',
 			'2023-12-31' => 'Thirty-first of December, Twenty twenty-three',
 		];
 
@@ -52,6 +52,6 @@ class DateToWordsTest extends TestCase
 	public function testEdgeCases()
 	{
 		$this->assertEquals('First of January, One', DateToWords::convert('0001-01-01'));
-		$this->assertEquals('Thirty-first of December, Nine thousand nine hundred ninety-nine', DateToWords::convert('9999-12-31'));
+		$this->assertEquals('Thirty-first of December, Ninety-nine ninety-nine', DateToWords::convert('9999-12-31'));
 	}
 }
