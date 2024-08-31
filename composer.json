@@ -12,12 +12,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Fahdi\PhpDateFormat\": "src/"
+            "Fahdi\\PhpDateFormat\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fahdi\PhpDateFormat\Tests\": "tests/"
+            "Fahdi\\PhpDateFormat\\Tests\\": "tests/"
         }
     }
 }
