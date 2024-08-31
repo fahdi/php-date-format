@@ -74,12 +74,14 @@ class DateToWords
 			$century = floor($year / 100);
 			$remainder = $year % 100;
 
+			$centuryWord = ucfirst($formatter->format($century));
+
 			if ($remainder == 0) {
-				return ucfirst($formatter->format($century)) . ' hundred';
+				return $centuryWord . ' hundred';
 			} elseif ($remainder < 10) {
-				return ucfirst($formatter->format($century)) . ' oh ' . $formatter->format($remainder);
+				return $centuryWord . ' oh ' . $formatter->format($remainder);
 			} else {
-				return ucfirst($formatter->format($century)) . ' ' . $formatter->format($remainder);
+				return $centuryWord . ' ' . $formatter->format($remainder);
 			}
 		} else {
 			return ucfirst($formatter->format($year));
