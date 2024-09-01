@@ -83,6 +83,30 @@ class DateToWords
 			$century = floor($year / 100);
 			$remainder = $year % 100;
 
+			if ($year == 2000) {
+				return 'Two thousand';
+			}
+
+			$centuryWords = [
+				18 => 'Eighteen',
+				19 => 'Nineteen',
+				20 => 'Twenty',
+				21 => 'Twenty-one',
+				22 => 'Twenty-two'
+			];
+
+			if (isset($centuryWords[$century])) {
+				if ($remainder == 0) {
+					return $centuryWords[$century] . ' hundred';
+				} else {
+					if ($century == 20 && $remainder < 10) {
+						return $centuryWords[$century] . ' oh-' . $formatter->format($remainder);
+					} else {
+						return $centuryWords[$century] . ' ' . $formatter->format($remainder);
+					}
+				}
+			}
+
 			$centuryWord = ucfirst($formatter->format($century * 100));
 
 			if ($remainder == 0) {

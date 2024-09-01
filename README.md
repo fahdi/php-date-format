@@ -34,14 +34,26 @@ require_once 'vendor/autoload.php';
 
 use Fahdi\PhpDateFormat\DateToWords;
 
+echo DateToWords::convert('1890-05-15');
+// Output: Fifteenth of May, Eighteen ninety
+
 echo DateToWords::convert('1990-05-15');
-// Output: Fifteenth of May, One thousand nine hundred ninety
+// Output: Fifteenth of May, Nineteen ninety
 
 echo DateToWords::convert('2023-12-31');
-// Output: Thirty-first of December, Two thousand twenty-three
+// Output: Thirty-first of December, Twenty twenty-three
+
+echo DateToWords::convert('1800-01-01');
+// Output: First of January, Eighteen hundred
+
+echo DateToWords::convert('1900-01-01');
+// Output: First of January, Nineteen hundred
 
 echo DateToWords::convert('2000-02-29');
 // Output: Twenty-ninth of February, Two thousand
+
+echo DateToWords::convert('2100-12-31');
+// Output: Thirty-first of December, Twenty-one hundred
 ```
 
 The `convert` method accepts dates in various formats:
